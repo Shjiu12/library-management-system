@@ -60,3 +60,32 @@ class Fine(models.Model):
 
     def __str__(self):
         return f"Fine for Loan {self.loan.id} - {self.amount}"
+class BookRequest(models.Model):
+    class Status(models.TextChoices):
+        PENDING='PENDING','Pending',
+        APPROVED='APPROVED','Approved',
+        REJECTED='REJECTED','Rejected'
+    member=models.ForeignKey(
+        'members.Members',
+        on_delete=models.CASCADE,
+        related_name='book_requests'
+    )
+    book=models.ForeignKey(
+        'books.Book',
+        on_delete=models.CASCADE,
+        related_name='requests'
+    )
+    status=models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.PENDING
+    )
+    requested_at=models.DateTimeField(auto_now_add=True)
+    reviewed_at=models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    def __str__(self):
+        return f"{self.member.user.usernmae}-{self.book.title}-{self.status}"
+    

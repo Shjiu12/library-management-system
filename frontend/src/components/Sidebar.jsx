@@ -1,7 +1,10 @@
 
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Sidebar() {
+    const { user } = useAuth();
+
     const menuItems = [
         { name: 'Dashboard', path: '/dashboard', icon: 'bi-speedometer2' },
         { name: 'Books', path: '/books', icon: 'bi-book' },
@@ -15,9 +18,16 @@ function Sidebar() {
         { name: 'Reports', path: '/reports', icon: 'bi-file-earmark-bar-graph' },
     ];
 
+    if (['ADMIN', 'LIBRARIAN'].includes(user?.role)) {
+        menuItems.push({
+            name: 'Book Requests',
+            path: '/book-requests',
+            icon: 'bi-bookmark-check'
+        });
+    }
+
     return (
         <div className="bg-white border-end min-vh-100 p-3">
-            {/* Brand */}
             <div className="d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
                 <div className="bg-primary-subtle text-primary rounded-3 p-2">
                     <i className="bi bi-book-half fs-4"></i>
@@ -28,7 +38,6 @@ function Sidebar() {
                 </span>
             </div>
 
-            {/* Sidebar menu */}
             <nav className="nav nav-pills flex-column gap-1">
                 {menuItems.map((item) => (
                     <NavLink
@@ -36,9 +45,7 @@ function Sidebar() {
                         to={item.path}
                         className={({ isActive }) =>
                             `nav-link d-flex align-items-center gap-2 ${
-                                isActive
-                                    ? 'active'
-                                    : 'text-secondary'
+                                isActive ? 'active' : 'text-secondary'
                             }`
                         }
                     >

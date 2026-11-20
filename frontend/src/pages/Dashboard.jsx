@@ -40,56 +40,96 @@ function Dashboard() {
         );
     }
 
-    const cards = [
-        {
-            title: 'Total Books',
-            value: stats.total_books,
-            icon: 'bi-book',
-            color: 'primary',
-        },
-        {
-            title: 'Total Copies',
-            value: stats.total_copies,
-            icon: 'bi-collection',
-            color: 'success',
-        },
-        {
-            title: 'Available Copies',
-            value: stats.available_copies,
-            icon: 'bi-bookmark-check',
-            color: 'info',
-        },
-        {
-            title: 'Issued Copies',
-            value: stats.issued_copies,
-            icon: 'bi-arrow-left-right',
-            color: 'warning',
-        },
-        {
-            title: 'Total Members',
-            value: stats.total_members,
-            icon: 'bi-people',
-            color: 'primary',
-        },
-        {
-            title: 'Active Loans',
-            value: stats.active_loans,
-            icon: 'bi-clock',
-            color: 'secondary',
-        },
-        {
-            title: 'Overdue Loans',
-            value: stats.overdue_loans,
-            icon: 'bi-exclamation-circle',
-            color: 'danger',
-        },
-        {
-            title: 'Total Fines',
-            value: `₹${stats.total_fines}`,
-            icon: 'bi-cash-coin',
-            color: 'success',
-        },
-    ];
+    
+    const cards = user?.role === 'MEMBER'
+        ? [
+            {
+                title: 'Total Borrowed',
+                value: stats.total_borrowed,
+                icon: 'bi-book',
+                color: 'primary',
+            },
+            {
+                title: 'Active Loans',
+                value: stats.active_loans,
+                icon: 'bi-clock',
+                color: 'success',
+            },
+            {
+                title: 'Overdue Loans',
+                value: stats.overdue_loans,
+                icon: 'bi-exclamation-circle',
+                color: 'danger',
+            },
+            {
+                title: 'Returned Books',
+                value: stats.returned_loans,
+                icon: 'bi-bookmark-check',
+                color: 'info',
+            },
+            {
+                title: 'Total Fines',
+                value: `₹${stats.total_fines}`,
+                icon: 'bi-cash-coin',
+                color: 'warning',
+            },
+            {
+                title: 'Unpaid Fines',
+                value: `₹${stats.unpaid_fines}`,
+                icon: 'bi-wallet',
+                color: 'danger',
+            },
+        ]
+        : [
+            {
+                title: 'Total Books',
+                value: stats.total_books,
+                icon: 'bi-book',
+                color: 'primary',
+            },
+            {
+                title: 'Total Copies',
+                value: stats.total_copies,
+                icon: 'bi-collection',
+                color: 'success',
+            },
+            {
+                title: 'Available Copies',
+                value: stats.available_copies,
+                icon: 'bi-bookmark-check',
+                color: 'info',
+            },
+            {
+                title: 'Issued Copies',
+                value: stats.issued_copies,
+                icon: 'bi-arrow-left-right',
+                color: 'warning',
+            },
+            {
+                title: 'Total Members',
+                value: stats.total_members,
+                icon: 'bi-people',
+                color: 'primary',
+            },
+            {
+                title: 'Active Loans',
+                value: stats.active_loans,
+                icon: 'bi-clock',
+                color: 'secondary',
+            },
+            {
+                title: 'Overdue Loans',
+                value: stats.overdue_loans,
+                icon: 'bi-exclamation-circle',
+                color: 'danger',
+            },
+            {
+                title: 'Total Fines',
+                value: `₹${stats.total_fines}`,
+                icon: 'bi-cash-coin',
+                color: 'success',
+            },
+        ];
 
     return (
         <div>

@@ -6,7 +6,10 @@ from .views import (
     ReturnBookView,
     LoanHistoryView,
     FineListView,
-    FinePaymentView
+    FinePaymentView,
+    BookRequestListCreateView,
+    ReviewBookRequestView,
+    
 )
 
 urlpatterns = [
@@ -19,4 +22,7 @@ urlpatterns = [
         FinePaymentView.as_view(),
         name='fine-payment'
     ),
+    path('requests/',BookRequestListCreateView.as_view(),name='book-request-list-create'),
+    path('requests/<int:request_id>/review/',ReviewBookRequestView.as_view(),
+         name='review-book-request'),
 ]
